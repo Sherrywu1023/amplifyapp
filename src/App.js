@@ -23,17 +23,7 @@ import {
 import {Amplify} from 'aws-amplify';
 import awsExports from './aws-exports'; // The path may vary
 import { generateClient } from 'aws-amplify/api';
-import { API, Storage } from 'aws-amplify';
-import {
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Text,
-  TextField,
-  View,
-  withAuthenticator,
-} from '@aws-amplify/ui-react';
+const API = generateClient();
 
 Amplify.configure(awsExports);
 
@@ -78,7 +68,6 @@ const App = ({ signOut }) => {
     fetchNotes();
     event.target.reset();
   }
-  
 
   async function deleteNote({ id, name }) {
     const newNotes = notes.filter((note) => note.id !== id);
@@ -89,7 +78,7 @@ const App = ({ signOut }) => {
       variables: { input: { id } },
     });
   }
-
+  
   return (
     <View className="App">
       <Heading level={1}>My Notes App</Heading>
